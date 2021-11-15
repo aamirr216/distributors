@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load humanize %}
+<section id="login" class="bg-light py-5">  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        
+          <ul class="list-group">
+         
+            <li class="list-group-item active">
+              {% if user.is_authenticated %}
+                <i class="fas fa-sign-in-alt"></i> {{user.username}}
+              {% else %}
+                <i class="fas fa-sign-in-alt"></i> Please Login
+              {% endif %}
+
+            </li> 
+            
+ 
+          {% comment %} <div class="card-body"> {% endcomment %}
+
+            <!-- Alerts -->
+              <li class="list-group-item">{% include 'partials/__alerts.html' %}</li>
+              {% if user.is_authenticated %}
+                {% if orderscount %}
+                <li class="list-group-item">
+                  <a href="{% url 'delivery' %}"> Order's : ({{orderscount}})</a>
+                </li>
+                {% endif %}
+                <li class="list-group-item"><a href="{% url 'orders' %}">New Order</a></li>
+                <li class="list-group-item"><a href="{% url 'delivered_list' %}">All Delivered Order(s)</a></li>
+              {% endif %}              
+              
+            </ul>          
+            
+            
+
+          {% comment %} </div> {% endcomment %}
+        
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

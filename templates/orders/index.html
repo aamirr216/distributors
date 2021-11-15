@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-2">
+    <form action="{% url 'ordercreate' %}" method="post">
+    {% csrf_token %}
+    {% comment %} <div id="InputsWrapper"> {% endcomment %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            {% comment %} <label for="shops">Select Shop:</label> {% endcomment %}
+            <div class="form-group">
+                <label for="formGroupExampleInput">Select Shop..</label>
+                <select name="shop" id="shop" class="form-control">  
+
+                    {% if shops %}
+                        {% for x in shops %}
+                            <option value={{x.id}}>{{x.shopname}}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+        </li>
+        <button type="button" class="btn btn-primary" id="target">Add Order</button>    
+        
+            <li class="list-group-item d-flex justify-content-between align-items-center order" id="myorder">
+            <div class="col">
+                <select name="products" id="products" class="">   
+                    {% if products %}
+                        {% for prod in products %}
+                            <option value={{prod.id}}>{{prod.product_name}}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select> 
+            </div>
+            <div class="col">
+                <label for="staticEmail" class="col-sm-2 col-form-label float-end">Qty:</label>
+            </div>
+            <div class="col">
+                <select name="qty" id="qty" class="">                 
+                
+                    <option value="1">1</option>               
+                    <option value="2">2</option>               
+                    <option value="3">3</option>               
+                    <option value="4">4</option>               
+                    <option value="5">5</option>               
+
+                
+                </select> 
+            </div>          
+                <button type="button" class="btn btn-primary glyphicon-remove btn-sm">x</button>  
+            </li>
+            <div class="wrapper">
+                
+            </div>
+        </ul> 
+    <button type="submit" class="btn btn-success" id="target">Submit</button> 
+    </form>
+    <div class="row">
+        <a class="btn btn-link" href="{% url 'delivery' %}" role="button">Delivery</a> 
+    </div>
+</div>
+
+
+ {% endblock %}

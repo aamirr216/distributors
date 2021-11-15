@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load humanize %}
+
+<div class="container mt-3">
+                    <!-- ALERT -->   
+                    {% include 'partials/__alerts.html' %}
+   
+    {% if shop %}
+        <span class="d-block p-2 bg-info text-white">{{shop.shopname}}</span>
+    {% endif %}
+
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Qty.</th>
+            <th scope="col">Update</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>  
+        {% if orders %}
+            {% for x in orders %}
+                <tr>
+                    <th scope="row">{{x.id}}</th>
+                    <td>{{x.product}}</td>
+                    <td>{{x.qty}}</td>
+                    <td>{{x.date|naturaltime}}</td>
+                    <td><a href="{% url 'orderforedit' x.id %}"><button type="button" class="btn btn-link">Edit</button></td> 
+                    <td><a href="{% url 'order' x.id %}"><button type="button" class="btn btn-link">Delete</button></td>               
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+    </tbody>
+    </table>
+</div>
+{% endblock %}

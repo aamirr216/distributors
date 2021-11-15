@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load humanize %}
+<div class="container mt-2">
+                    <!-- ALERT -->   
+                    {% include 'partials/__alerts.html' %}
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Shops</th>
+            <th scope="col">Products</th>
+            <th scope="col">Divered Date</th>
+            {% comment %} <th scope="col">Order</th> {% endcomment %}
+            <th scope="col">Delivered</th>
+        </tr>
+    </thead>
+    <tbody>  
+        {% if deliveries %}
+            {% for x in deliveries %}
+                <tr>
+                    {% comment %} <td><a href="{% url 'fordeliver' x.id %}">{{x.shopname}}</a></td> {% endcomment %}
+                    <td>{{x.id}}</td>
+                    <td>{{x.shopname}}</td>
+                    <td>{{x.product_name}}</td>
+                    <td>{{x.date}}</td>
+                    <td>{{x.username}}</td>
+                    {% comment %} <td>{{x.username}}</td> {% endcomment %}
+                    {% comment %} <td><a href="{% url 'fordeliver' x.id %}"><button type="button" class="btn btn-link">Delivery</button></a></td>                 
+                    <td><a href="{% url 'orderlist' x.id %}"><button type="button" class="btn btn-link">All Orders</button></td>                  {% endcomment %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+    </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

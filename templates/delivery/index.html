@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-2">
+                    <!-- ALERT -->   
+                    {% include 'partials/__alerts.html' %}
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Shops</th>
+            <th scope="col">Action</th>
+            <th scope="col">Orders</th>
+        </tr>
+    </thead>
+    <tbody>  
+        {% if shops %}
+            {% for x in shops %}
+                <tr>
+                    <td><a href="{% url 'fordeliver' x.id %}">{{x.shopname}}</a></td>
+                    <td><a href="{% url 'fordeliver' x.id %}"><button type="button" class="btn btn-link">Delivery</button></a></td>                 
+                    <td><a href="{% url 'orderlist' x.id %}"><button type="button" class="btn btn-link">All Orders</button></td>                 
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+    </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

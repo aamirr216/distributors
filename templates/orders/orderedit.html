@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <form action="{% url 'orderupdate' %}" method="post">
+        {% csrf_token %}
+        {% if order %}
+            <ul class="list-group">
+                <li class="list-group-item active"><h5>{{shop.shopname}}</h5></li>
+                <li class="list-group-item">
+                <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" value={{order.id}} readonly name="orderid">
+                </li>
+                <li class="list-group-item"><h4>{{order.product}}</h4></li>
+                <li class="list-group-item">
+                
+                    <select name="qty" id="qty" class=""> 
+                        <option value="{{order.qty}}" selected="{{order.qty}}">{{order.qty}}</option>                                    
+                        <option value="1">1</option>               
+                        <option value="2">2</option>               
+                        <option value="3">3</option>               
+                        <option value="4">4</option>               
+                        <option value="5">5</option>
+                    </select> 
+                </li>                
+                <li class="list-group-item">    
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">Update</button>
+                </li>
+            </ul>
+        {% endif %}
+    </form>
+
+
+{% comment %} <div class="row">
+    <a class="btn btn-link" href="{% url 'delivery' %}" role="button">Delivery</a> 
+</div> {% endcomment %}
+</div>
+
+
+ {% endblock %}
